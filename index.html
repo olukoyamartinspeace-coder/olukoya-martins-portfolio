@@ -817,6 +817,9 @@
   // contact form -> /api/contact (Python backend)
   const contactForm = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
+  const apiUrl = window.location.protocol === 'file:'
+    ? 'https://olukoya-martins-portfolio.vercel.app/api/contact'
+    : '/api/contact';
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     formStatus.className = '';
@@ -826,7 +829,7 @@
     try {
       contactForm.classList.add('sending');
       btn.innerHTML = '<span>Sending...</span>';
-      const res = await fetch('/api/contact', {
+      const res = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

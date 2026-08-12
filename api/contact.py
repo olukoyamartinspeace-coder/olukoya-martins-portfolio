@@ -7,6 +7,14 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
+
+@app.after_request
+def add_cors_headers(resp):
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    resp.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    resp.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    return resp
+
 GMAIL_USER = os.environ.get("GMAIL_USER", "peacedamola534@gmail.com")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "")
 
@@ -69,6 +77,11 @@ def contact():
     return jsonify({"ok": True})
 
 
-@app.route("/api/contact", methods=["GET", "OPTIONS"])
+@app.route("/api/contact", methods=["OPTIONS"])
+def preflight():
+    return ("", 204)
+
+
+@app.route("/api/contact", methods=["GET"])
 def contact_info():
     return jsonify({"ok": True, "message": "POST your contact form here."})
