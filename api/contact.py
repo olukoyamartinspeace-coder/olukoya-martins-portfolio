@@ -1,4 +1,4 @@
-import email.utils
+import email.utils as email_utils
 import os
 import smtplib
 from email.mime.text import MIMEText
@@ -26,7 +26,7 @@ def contact():
         return jsonify({"ok": False, "error": "Missing fields: " + ", ".join(missing)}), 400
 
     name = str(data["name"]).strip()
-    email = str(data["email"]).strip()
+    visitor_email = str(data["email"]).strip()
     project_type = str(data.get("project_type", "")).strip()
     budget = str(data.get("budget", "")).strip()
     message = str(data["message"]).strip()
@@ -34,7 +34,7 @@ def contact():
     subject = f"New project inquiry from {name} — Olukoya Martins portfolio"
     body = (
         f"Name: {name}\n"
-        f"Email: {email}\n"
+        f"Email: {visitor_email}\n"
         f"Project type: {project_type or 'Not specified'}\n"
         f"Budget: {budget or 'Not specified'}\n\n"
         f"Message:\n{message}\n"
@@ -50,8 +50,8 @@ def contact():
     msg["Subject"] = subject
     msg["From"] = f"Portfolio Contact <{GMAIL_USER}>"
     msg["To"] = GMAIL_USER
-    msg["Reply-To"] = email
-    msg["Date"] = email.utils.formatdate(localtime=True)
+    msg["Reply-To"] = visitor_email
+    msg["Date"] = email_utils.formatdate(localtime=True)
 
     try:
         with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as server:
