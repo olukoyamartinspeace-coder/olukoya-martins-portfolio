@@ -9,6 +9,10 @@ asset/html-script
 # Vercel
 .vercel/
 
+# Python
+__pycache__/
+*.pyc
+
 # OS
 .DS_Store
 
