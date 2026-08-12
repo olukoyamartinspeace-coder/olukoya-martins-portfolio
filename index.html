@@ -421,6 +421,10 @@
   .form-field textarea:focus{border-color:var(--accent);}
   .form-field textarea{min-height:140px;resize:vertical;}
   .contact-form button[type="submit"]{background:transparent;cursor:pointer;align-self:flex-start;}
+  #formStatus{font-size:15px;line-height:1.5;min-height:22px;font-weight:500;}
+  #formStatus.ok{color:#15803d;}
+  #formStatus.err{color:#b91c1c;}
+  #contactForm.sending button[type="submit"]{opacity:.6;pointer-events:none;}
 
   @media (max-width:900px){
     .contact-grid{flex-direction:column;gap:48px;}
@@ -659,10 +663,8 @@
           <p>Tell me about your product, your timeline, and what "done" looks like. I read everything that lands here and reply within one business day.</p>
           <p>Prefer plain email? <a class="email" href="mailto:olukoyamartinspeace@gmail.com">olukoyamartinspeace@gmail.com</a></p>
         </div>
-        <form class="contact-form reveal" action="https://formsubmit.co/olukoyamartinspeace@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New project inquiry — Olukoya Martins portfolio">
-          <input type="hidden" name="_next" value="thank-you.html">
-          <input type="hidden" name="_captcha" value="false">
+        <form id="contactForm" class="contact-form reveal" action="/api/contact" method="POST" novalidate>
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0">
           <div class="form-row">
             <div class="form-field">
               <label for="c-name">Name</label>
@@ -694,6 +696,7 @@
             <textarea id="c-msg" name="message" placeholder="What are you building, and what does success look like?" required></textarea>
           </div>
           <button class="ring pill" type="submit"><span>Send inquiry</span></button>
+          <div id="formStatus" role="status" aria-live="polite"></div>
         </form>
       </div>
     </div>
@@ -810,6 +813,38 @@
     </div>`;
   }
   track.innerHTML = testimonials.map(renderCard).join('') + testimonials.map(renderCard).join('');
+
+  // contact form -> /api/contact (Python backend)
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    formStatus.className = '';
+    formStatus.textContent = '';
+    const btn = contactForm.querySelector('button[type="submit"]');
+    const data = Object.fromEntries(new FormData(contactForm).entries());
+    try {
+      contactForm.classList.add('sending');
+      btn.innerHTML = '<span>Sending...</span>';
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && json.ok) {
+        window.location.href = 'thank-you.html';
+        return;
+      }
+      throw new Error(json.error || 'Something went wrong.');
+    } catch (err) {
+      formStatus.className = 'err';
+      formStatus.textContent = 'Could not send the message. Please try again, or email me directly.';
+    } finally {
+      contactForm.classList.remove('sending');
+      btn.innerHTML = '<span>Send inquiry</span>';
+    }
+  });
 
   // grain / noise overlay — draws at low res, scaled up via CSS + pixelated rendering
   (function(){

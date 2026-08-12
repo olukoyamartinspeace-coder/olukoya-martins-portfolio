@@ -11,3 +11,5 @@ asset/html-script
 
 # OS
 .DS_Store
+
+.vercel
