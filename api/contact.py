@@ -7,7 +7,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-GMAIL_USER = os.environ.get("GMAIL_USER", "olukoyamartinspeace@gmail.com")
+GMAIL_USER = os.environ.get("GMAIL_USER", "peacedamola534@gmail.com")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "")
 
 REQUIRED = ("name", "email", "message")
