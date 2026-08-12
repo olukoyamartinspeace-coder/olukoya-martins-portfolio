@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Message Sent — Olukoya Martins</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f0f0f0;
+    --white:#ffffff;
+    --ink:#0a0a0a;
+    --gray:#6e6e6e;
+    --accent:#4f46e5;
+    --r-lg:32px;
+    --r-pill:999px;
+    --font-d:'League Spartan',sans-serif;
+    --font-b:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;background:var(--cream);color:var(--ink);
+    font-family:var(--font-b);-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  .card{
+    max-width:560px;width:100%;text-align:center;background:var(--white);
+    border-radius:var(--r-lg);padding:64px 48px;
+    box-shadow:0 20px 44px rgba(0,0,0,.06);
+  }
+  .check{
+    width:72px;height:72px;border-radius:50%;background:#e8e6fd;color:var(--accent);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:32px;font-weight:700;
+  }
+  h1{font-family:var(--font-d);font-weight:900;font-size:36px;letter-spacing:-0.03em;margin:0 0 12px;}
+  p{color:var(--gray);font-size:17px;line-height:1.6;margin:0 0 32px;}
+  .pill{
+    display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 32px;
+    border:2px solid var(--ink);border-radius:var(--r-pill);background:var(--ink);
+    font-family:var(--font-b);font-size:16px;font-weight:600;color:var(--cream);text-decoration:none;
+    transition:transform .2s;
+  }
+  .pill:hover{transform:translateY(-2px);}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="check">✓</div>
+    <h1>Message Sent</h1>
+    <p>Thanks for reaching out. Your message is on its way to my inbox — I'll get back to you within one business day.</p>
+    <a class="pill" href="index.html">Back to home</a>
+  </div>
+</body>
+</html>

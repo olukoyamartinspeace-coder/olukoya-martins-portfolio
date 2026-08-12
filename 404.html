@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Page Not Found | Olukoya Martins</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --cream:#f0f0f0;
+    --gray:#9a9aa2;
+    --accent:#4f46e5;
+    --r-pill:999px;
+    --font-d:'League Spartan',sans-serif;
+    --font-b:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;background:var(--ink);color:var(--cream);
+    font-family:var(--font-b);-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    padding:24px;text-align:center;overflow:hidden;
+  }
+  .grid-lines{
+    position:fixed;inset:0;pointer-events:none;opacity:.25;
+    background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:80px 80px;
+  }
+  .glow{position:fixed;width:520px;height:520px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(79,70,229,.28),transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);}
+  .inner{position:relative;z-index:1;max-width:520px;}
+  .code{
+    font-family:var(--font-d);font-weight:900;font-size:160px;line-height:1;
+    letter-spacing:-0.04em;margin:0;
+    background:linear-gradient(120deg,#fff 30%,var(--accent));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  h1{font-family:var(--font-d);font-weight:700;font-size:32px;letter-spacing:-0.02em;margin:16px 0 12px;}
+  p{color:var(--gray);font-size:17px;line-height:1.6;margin:0 0 36px;}
+  .btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .pill{
+    display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 32px;
+    border:2px solid var(--cream);border-radius:var(--r-pill);
+    font-family:var(--font-b);font-size:16px;font-weight:600;color:var(--cream);text-decoration:none;
+    transition:background .25s,color .25s;
+  }
+  .pill:hover{background:var(--cream);color:var(--ink);}
+  .pill--solid{background:var(--cream);color:var(--ink);border-color:var(--cream);}
+  .pill--solid:hover{background:transparent;color:var(--cream);}
+  @media (max-width:640px){ .code{font-size:110px;} h1{font-size:26px;} }
+</style>
+</head>
+<body>
+  <div class="grid-lines"></div>
+  <div class="glow"></div>
+  <main class="inner">
+    <div class="code">404</div>
+    <h1>This page took a wrong turn.</h1>
+    <p>The page you're looking for doesn't exist — but the work does. Head back to the main site.</p>
+    <div class="btns">
+      <a class="pill pill--solid" href="index.html">Back home</a>
+      <a class="pill" href="index.html#work">See the work</a>
+    </div>
+  </main>
+</body>
+</html>

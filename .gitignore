@@ -1,0 +1,13 @@
+# Windows junk
+desktop.ini
+Thumbs.db
+
+# Scratch / reference files (not part of the site)
+fill-buttons.html
+asset/html-script
+
+# Vercel
+.vercel/
+
+# OS
+.DS_Store
